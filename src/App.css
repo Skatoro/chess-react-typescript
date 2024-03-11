@@ -1,0 +1,405 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+
+}
+body{
+
+    overflow-x: hidden;
+}
+.app {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #302E2B;
+    min-width: 850px;
+}
+
+.opacity80 {
+    opacity: 0.5;
+}
+
+.opacity50 {
+    opacity: 0.5;
+}
+.boardContainer{
+    position: relative;
+
+}
+.board {
+    width: calc(75vh);
+    height: calc(75vh);
+    display: flex;
+    flex-wrap: wrap;
+    margin-right: 32px;
+}
+
+.cell {
+    width: calc(75vh / 8);
+    height: calc(75vh / 8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.cell img {
+    height: 100%;
+    width: 100%;
+    position: relative;
+    user-select: none;
+}
+
+.black {
+    background-color: #739552;
+}
+
+.white {
+    background-color: #ebecd0;
+}
+
+.selected {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background-color: rgb(255, 255, 51) !important;
+    opacity: 0.5;
+}
+
+.available {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 33%;
+    height: 33%;
+    background-color: rgba(0, 0, 0, 0.14) !important;
+    border-radius: 50%;
+    z-index: 1;
+}
+
+.captureAvailable {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    z-index: 2;
+    border: 5px solid rgba(0, 0, 0, 0.14);
+    border-radius: 50%;
+
+}
+
+.checkedKing {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    z-index: 0;
+    background-color: rgba(255, 100, 100, 0.5);
+}
+
+.sidebar{
+    position: relative;
+}
+
+.timerContainer {
+    font-size: 24px;
+    font-family: "Roboto", sans-serif;
+    font-weight: 500;
+    user-select: none;
+    background-color: rgba(0,0,0,.14);
+    height: calc(75vh);
+    padding: 16px 16px 0 16px;
+    width: 33vw;
+}
+
+.timer {
+    border-radius: 3px;
+    padding: 0 10px 0 40px;
+    width: 135px;
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    height: 40px;
+    position: relative;
+    margin-bottom: 16px;
+}
+
+.clockIcon {
+    position: absolute;
+    left: 10px;
+}
+
+.timerBlack {
+    color: #fff;
+    fill: #fff;
+    background-color: #262421;
+}
+
+.timerWhite {
+    color: #262421;
+    fill: #262421;
+    background-color: #fff;
+}
+
+.restartTimer{
+    background-color: hsla(0, 0%, 100%, .08);
+    fill: hsla(0, 0%, 100%, .8);
+    border-radius: 5px;
+    transition-duration: 0.1s;
+    transition-property: box-shadow, background-color, color, fill;
+    transition-timing-function: ease-out;
+    border: none;
+    padding: 5px 20px;
+    height: 48px;
+    width: 126px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: inset 0 calc(.1rem*-1) 0 0 rgba(0,0,0,.25);
+    cursor: pointer;
+    margin-bottom: 16px;
+}
+.restartTimer:hover{
+    background-color: hsla(0, 0%, 100%, .16);
+    fill: hsla(0, 0%, 100%, 100);
+}
+.restartTimer span{
+    color: hsla(0, 0%, 100%, .72);
+    font-family: "Roboto", sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+}
+.restartTimer:hover span{
+    color: rgb(255, 255, 255);
+}
+.moveHistoryPlaceholder{
+    width: 100%;
+    height: calc(75vh - 64px - 56px * 2 - 16px);
+}
+.moveHistory{
+    position: absolute;
+    overflow-y: auto;
+    height: calc(75vh - 64px - 56px * 2 - 32px);
+    width: calc(33vw);
+    top: 72px;
+    color: hsla(0,0%,100%,.5);
+    font-weight: 500;
+    font-family: "Roboto", sans-serif;
+    border-top: 1px solid hsla(0,0%,100%,.1);
+    background-color: rgba(30, 30, 30, 0.14);
+    scrollbar-color: rgba(0,0,0,.45) transparent;
+    scrollbar-width: thin;
+}
+.light-row, .dark-row{
+    display: flex;
+    align-items: center;
+    height: 30px;
+    padding: 0 15px;
+    position: relative;
+}
+.light-row {
+    background-color: hsla(0,0%,100%,.02);
+}
+.dark-row {
+    background-color: transparent;
+}
+.moveNodeWhite{
+    position: absolute;
+    color: hsla(0,0%,100%,.72);
+    left: 55px;
+}
+.moveNodeBlack{
+    position: absolute;
+    color: hsla(0,0%,100%,.72);
+    left: 155px;
+}
+
+.lost {
+    display: flex;
+    margin: 8px 0;
+    height: 20px;
+    position: relative;
+    align-items: end;
+}
+.winScreen{
+    position: absolute;
+    border-radius: 10px;
+    background-color: #262421;
+    width: 300px;
+    height: 50px;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    color: #fff;
+    font-size: 22px;
+    font-weight: 700;
+    font-family: "Montserrat",sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.captured-pieces{
+    background-image: url("assets/captured-pieces.png");
+    background-repeat: no-repeat;
+    background-size: 683px 611px;
+    display: inline-block;
+    margin-right: 3px;
+}
+.captured-pieces-b-1-pawn, .captured-pieces-w-1-pawn {
+     height: 17px;
+     width: 13px;
+}
+.captured-pieces-b-2-pawn, .captured-pieces-w-2-pawn {
+    height: 17px;
+    width: 20px;
+}
+.captured-pieces-b-3-pawn, .captured-pieces-w-3-pawn {
+    height: 17px;
+    width: 27px;
+}
+.captured-pieces-b-4-pawn, .captured-pieces-w-4-pawn {
+    height: 17px;
+    width: 34px;
+}
+.captured-pieces-b-5-pawn, .captured-pieces-w-5-pawn {
+     height: 17px;
+     width: 41px;
+}
+.captured-pieces-b-6-pawn, .captured-pieces-w-6-pawn {
+    height: 17px;
+    width: 48px;
+}
+.captured-pieces-b-7-pawn, .captured-pieces-w-7-pawn {
+    height: 17px;
+    width: 55px;
+}
+.captured-pieces-b-8-pawn, .captured-pieces-w-8-pawn {
+    height: 17px;
+    width: 62px;
+}
+.captured-pieces-b-1-pawn {
+    background-position: 0 -594px;
+}
+.captured-pieces-b-2-pawn {
+    background-position: 0 -569px;
+}
+.captured-pieces-b-3-pawn {
+    background-position: 0 -544px;
+}
+.captured-pieces-b-4-pawn {
+    background-position: 0 -519px;
+}
+.captured-pieces-b-5-pawn {
+    background-position: 0 -494px;
+}
+.captured-pieces-b-6-pawn {
+     background-position: 0 -469px;
+}
+.captured-pieces-b-7-pawn {
+    background-position: 0 -444px;
+}
+.captured-pieces-b-8-pawn {
+    background-position: 0 -419px;
+}
+.captured-pieces-w-1-pawn {
+    background-position: -360px -594px;
+}
+.captured-pieces-w-2-pawn {
+    background-position: -360px -569px;
+}
+.captured-pieces-w-3-pawn {
+    background-position: -360px -544px;
+}
+.captured-pieces-w-4-pawn {
+    background-position: -360px -519px;
+}
+.captured-pieces-w-5-pawn {
+    background-position: -360px -494px;
+}
+.captured-pieces-w-6-pawn {
+    background-position: -360px -469px;
+}
+.captured-pieces-w-7-pawn {
+    background-position: -360px -444px;
+}
+.captured-pieces-w-8-pawn {
+    background-position: -361px -419px;
+}
+.captured-pieces-b-1-rook {
+    background-position: -120px -444px;
+}
+.captured-pieces-b-2-rook {
+    background-position: -120px -419px;
+}
+.captured-pieces-w-1-rook {
+    background-position: -480px -444px;
+}
+.captured-pieces-w-2-rook {
+    background-position: -480px -419px;
+}
+.captured-pieces-b-1-rook, .captured-pieces-w-1-rook {
+    height: 17px;
+    width: 15px;
+}
+.captured-pieces-b-2-rook, .captured-pieces-w-2-rook {
+    height: 17px;
+    width: 23px;
+}
+.captured-pieces-w-1-knight {
+    background-position: -454px -442px;
+}
+.captured-pieces-w-2-knight {
+    background-position: -454px -417px;
+}
+.captured-pieces-b-1-knight {
+    background-position: -95px -442px;
+}
+.captured-pieces-b-2-knight {
+    background-position: -95px -417px;
+}
+.captured-pieces-b-1-knight, .captured-pieces-w-1-knight {
+    height: 19px;
+    width: 16px;
+}
+.captured-pieces-b-2-knight, .captured-pieces-w-2-knight {
+    height: 19px;
+    width: 23px;
+}
+.captured-pieces-w-1-bishop {
+    background-position: -427px -443px;
+}
+.captured-pieces-w-2-bishop {
+    background-position: -427px -417px;
+}
+.captured-pieces-b-1-bishop {
+    background-position: -67px -443px;
+}
+.captured-pieces-b-2-bishop {
+    background-position: -67px -417px;
+}
+.captured-pieces-b-1-bishop, .captured-pieces-w-1-bishop {
+    height: 18px;
+    width: 15px;
+}
+.captured-pieces-b-2-bishop, .captured-pieces-w-2-bishop {
+    height: 19px;
+    width: 23px;
+}
+.captured-pieces-w-1-queen {
+    background-position: -504px -417px;
+}
+.captured-pieces-b-1-queen {
+    background-position: -145px -417px;
+}
+.captured-pieces-b-1-queen, .captured-pieces-w-1-queen {
+    height: 19px;
+    width: 18px;
+}
