@@ -5,8 +5,6 @@ Chess game with design of chess.com.
 After downloading the project's source code, you need to install the dependencies.
 To do this, you can use the following command:
 
-> Use **pnpm** here
-
 ```shell
 npm i
 # or
