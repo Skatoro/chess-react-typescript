@@ -1,5 +1,7 @@
 Chess game with design of chess.com.
 
+Tech stack: React, Typescript.
+
 ### Installing dependencies
 
 ```shell
